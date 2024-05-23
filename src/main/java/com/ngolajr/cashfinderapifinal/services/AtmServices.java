@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.stereotype.Service;
 
 import java.security.Timestamp;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -42,5 +43,9 @@ public class AtmServices {
         atm.setAtualizadoEm(time);
         repository.save(atm);
         return atm;
+    }
+
+    public List<Atm> atms(){
+        return repository.findAll();
     }
 }
