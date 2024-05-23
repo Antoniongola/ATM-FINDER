@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.stereotype.Service;
 
 import java.security.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,8 +28,9 @@ public class AtmServices {
         atm.setTemPapel(dto.papel());
         atm.setTemSistema(dto.sistema());
         repository.save(atm);
+        List<Atm> lista = repository.findAll();
 
-        return repository.findAll().getLast();
+        return lista.get(lista.size()-1);
     }
 
     public Atm atualizarEstado(AtmStateUpdate update, Long id){
@@ -43,6 +45,15 @@ public class AtmServices {
         atm.setAtualizadoEm(time);
         repository.save(atm);
         return atm;
+    }
+
+    public List<Atm> pesquisarAtmPeloLocal(String local){
+        return repository.findAtmsByBairro(local);
+    }
+
+    public Atm lastAddedAtm(){
+        List<Atm> lista = repository.findAll();
+        return lista.get(lista.size()-1);
     }
 
     public List<Atm> atms(){

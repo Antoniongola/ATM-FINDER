@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService service;
-
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody LoginRequest login){
         if(service.login(login) != null)
@@ -25,7 +24,7 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity<User> cadastro(@RequestBody User user){
         if(service.criarConta(user) != null)
-            return ResponseEntity.ok(service.criarConta(user));
+            return ResponseEntity.ok(service.selecionarUser(user.getNumero()));
 
         return ResponseEntity.ok(null);
     }
