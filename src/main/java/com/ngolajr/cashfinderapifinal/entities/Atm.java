@@ -16,8 +16,8 @@ public class Atm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String bairro;
-    private long latitude;
-    private long longitude;
+    private double latitude;
+    private double longitude;
     @CreationTimestamp
     private Timestamp atualizadoEm;
 }
