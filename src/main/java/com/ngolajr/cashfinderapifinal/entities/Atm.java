@@ -15,12 +15,11 @@ public class Atm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String nome;
     private String bairro;
     private boolean temDinheiro;
     private boolean temPapel;
     private boolean temSistema;
     private double latitude;
     private double longitude;
-    @CreationTimestamp
-    private Timestamp atualizadoEm;
 }

@@ -17,16 +17,16 @@ import java.util.List;
 public class AtmServices {
     private final AtmRepository repository;
 
-    @CreationTimestamp
-    Timestamp time;
     public Atm createAtm(AtmCreationDto dto){
         Atm atm = new Atm();
+        atm.setNome(dto.nome());
         atm.setBairro(dto.local());
         atm.setLongitude(dto.longitude());
         atm.setLatitude(dto.latitude());
         atm.setTemDinheiro(dto.dinheiro());
         atm.setTemPapel(dto.papel());
         atm.setTemSistema(dto.sistema());
+        System.out.println(atm);
         repository.save(atm);
         List<Atm> lista = repository.findAll();
 
@@ -42,7 +42,6 @@ public class AtmServices {
         atm.setTemPapel(update.papel());
         atm.setTemDinheiro(update.dinheiro());
         atm.setTemSistema(update.sistema());
-        atm.setAtualizadoEm(time);
         repository.save(atm);
         return atm;
     }
@@ -58,5 +57,35 @@ public class AtmServices {
 
     public List<Atm> atms(){
         return repository.findAll();
+    }
+
+    public int atmsDinheiro(){
+        int count=0;
+        List<Atm> lista = repository.findAll();
+        for(Atm atm : lista)
+            if(atm.isTemDinheiro())
+                count++;
+
+        return count;
+    }
+
+    public int atmsPapel(){
+        int count=0;
+        List<Atm> lista = repository.findAll();
+        for(Atm atm : lista)
+            if(atm.isTemPapel())
+                count++;
+
+        return count;
+    }
+
+    public int atmsSistema(){
+        int count=0;
+        List<Atm> lista = repository.findAll();
+        for(Atm atm : lista)
+            if(atm.isTemSistema())
+                count++;
+
+        return count;
     }
 }

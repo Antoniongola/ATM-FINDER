@@ -15,12 +15,12 @@ import java.util.List;
 @RequestMapping(path = "/api/atm", produces = "application/json")
 @RequiredArgsConstructor
 public class AtmController {
-    private AtmServices service;
+    private final AtmServices service;
 
     @PostMapping("")
     public ResponseEntity<Atm> criarAtm(@RequestBody AtmCreationDto dto){
-        if(service.createAtm(dto) != null)
-            return ResponseEntity.ok(service.createAtm(dto));
+        if(this.service.createAtm(dto) != null)
+            return ResponseEntity.ok(service.lastAddedAtm());
 
         return ResponseEntity.ok(null);
     }
@@ -38,4 +38,21 @@ public class AtmController {
     public ResponseEntity<List<Atm>> atms(){
         return ResponseEntity.ok(service.atms());
     }
+
+    @GetMapping("/dinheiro")
+    public ResponseEntity<Integer> atmsDinheiro(){
+        return ResponseEntity.ok(this.service.atmsDinheiro());
+    }
+
+    @GetMapping("/papel")
+    public ResponseEntity<Integer> atmsPapel(){
+        return ResponseEntity.ok(this.service.atmsPapel());
+    }
+
+    @GetMapping("/sistema")
+    public ResponseEntity<Integer> atmsSistema(){
+        return ResponseEntity.ok(this.service.atmsSistema());
+    }
+
+
 }
