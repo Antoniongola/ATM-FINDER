@@ -26,7 +26,7 @@ public class AtmController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Atm> atualizarAtm(@PathVariable long id, AtmStateUpdate update){
+    public ResponseEntity<Atm> atualizarAtm(@PathVariable long id, @RequestBody AtmStateUpdate update){
         if(service.atualizarEstado(update, id) != null){
             return ResponseEntity.ok(service.atualizarEstado(update, id));
         }

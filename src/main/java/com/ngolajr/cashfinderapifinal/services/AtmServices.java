@@ -42,7 +42,9 @@ public class AtmServices {
         atm.setTemPapel(update.papel());
         atm.setTemDinheiro(update.dinheiro());
         atm.setTemSistema(update.sistema());
+        System.out.println(atm);
         repository.save(atm);
+
         return atm;
     }
 
